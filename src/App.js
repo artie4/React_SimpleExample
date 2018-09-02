@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'Manu', age: 29 },
       { name: 'Stephanie', age: 26 }
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
 
@@ -36,8 +37,12 @@ class App extends Component {
     })
   }
 
-  render() {
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  }
 
+  render() {
     const style = {
       backgroundColor: 'white',
       font: 'inherit',
@@ -46,25 +51,28 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map(person => {
+            return <Person 
+            name={person.name}
+            age={person.age}
+            />
+          })}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App!!!</h1>
         <p>This is really working!</p>
         <button style={style}
-        onClick={() => this.switchNameHandler('Maximilian!')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Max!')}
-          changed={this.nameChangeHandler}
-          >My Hobbies:Racing</Person> {/*component use props children*/}
-          
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age} />
+          onClick={this.togglePersonHandler}>Toggle Persons</button>
+          {persons}
       </div>
     )
     // how it look when compile
