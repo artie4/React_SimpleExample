@@ -5,6 +5,41 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] Inside Constructor", props);
+  //   this.state = { 
+  //     persons: [
+  //     { id: 'a24f2', name: 'Max', age: 28 },
+  //     { id: 'af43ds1', name: 'Manu', age: 29 },
+  //     { id: 'af14f4', name: 'Stephanie', age: 26 }
+  //   ],
+  //   otherState: 'some other value',
+  //   showPersons: false
+  // }
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate()')
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentWillUpdate()', nextProps, nextState);
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside componentDidUpdate()', nextProps, nextState);
+  }
+
   state = {
     persons: [
       { id: 'a24f2', name: 'Max', age: 28 },
@@ -42,6 +77,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()');
     let persons = null;
 
     if (this.state.showPersons) {
@@ -62,15 +98,7 @@ class App extends Component {
         />
         {persons}
       </div>
-
     )
-    // how it look when compile
-    //   return(
-    //   React.createElement(
-    //     'div', 
-    //     { className: 'App' }, 
-    //     React.createElement('h1', null, 'Hi, I\'m a React App!!!')
-    //   )
   }
 }
 
